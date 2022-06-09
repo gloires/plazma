@@ -74,6 +74,25 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_web_plugins:
+    dependency: transitive
+    description: flutter
+    source: sdk
+    version: "0.0.0"
+  ionicons:
+    dependency: "direct main"
+    description:
+      name: ionicons
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.2"
+  js:
+    dependency: transitive
+    description:
+      name: js
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.4"
   lints:
     dependency: transitive
     description:
@@ -109,6 +128,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.1"
+  phosphor_flutter:
+    dependency: "direct main"
+    description:
+      name: phosphor_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.4.0"
+  qlevar_router:
+    dependency: "direct main"
+    description:
+      name: qlevar_router
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.5.11"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -165,3 +198,4 @@ packages:
     version: "2.1.2"
 sdks:
   dart: ">=2.17.1 <3.0.0"
+  flutter: ">=1.17.0"
