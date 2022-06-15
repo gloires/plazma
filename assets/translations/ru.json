@@ -1,0 +1,25 @@
+{
+  "home_tab": {
+    "title": "Главная",
+    "popular": "Популярные",
+    "latest": "Последние",
+    "coming_soon": "Скоро",
+    "currently_watching": "Сейчас смотрю",
+    "my_library": "Моя библиотека",
+    "see_more": "Больше"
+  },
+  "greetings": {
+    "morning":"Доброе утро,",
+    "afternoon": "Добрый день,",
+    "evening": "Добрый вечер,"
+  },
+  "search_tab": {
+    "title": "Поиск"
+  },
+  "library_tab": {
+    "title": "Библиотека"
+  },
+  "calendar_tab": {
+    "title": "Календарь"
+  }
+}

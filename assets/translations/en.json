@@ -1,0 +1,25 @@
+{
+  "home_tab": {
+    "title": "Home",
+    "popular": "Popular",
+    "latest": "The latest",
+    "coming_soon": "Coming soon",
+    "currently_watching": "Currently watching",
+    "my_library": "My library",
+    "see_more": "See more"
+  },
+  "greetings": {
+    "morning": "Good Morning,",
+    "afternoon": "Good Afternoon,",
+    "evening": "Good Evening,"
+  },
+  "search_tab": {
+    "title": "Search"
+  },
+  "library_tab": {
+    "title": "Library"
+  },
+  "calendar_tab": {
+    "title": "Calendar"
+  }
+}
