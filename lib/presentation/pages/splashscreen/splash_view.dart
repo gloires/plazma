@@ -7,7 +7,7 @@ class SplashView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text("Splash")
+          title: const Text("Splash screen")
       ),
     );
   }

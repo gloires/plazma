@@ -3,20 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 import 'package:plazma/core/theme/themes.dart';
 import 'package:plazma/core/route/route.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   runApp(
     EasyLocalization(
-        supportedLocales: const [
-          Locale('en'),
-          Locale('ru'),
-          Locale('uk')],
+        supportedLocales: const [Locale('en'), Locale('ru'), Locale('uk')],
         path: 'assets/translations',
         fallbackLocale: const Locale('en'),
         startLocale: const Locale('en'),
-        child: const PlazmaApp()),
+        child: ResponsiveSizer(builder: (context, orientation, screenType) {
+          return const PlazmaApp();
+        })),
   );
 }
 
@@ -33,7 +33,7 @@ class PlazmaApp extends StatelessWidget {
       locale: context.locale,
       routeInformationParser: const QRouteInformationParser(),
       routerDelegate: QRouterDelegate(
-        appRoutes.routes,
+        appRoutes.routes, initPath: '/dashboard'
       ),
       theme: darkTheme,
     );

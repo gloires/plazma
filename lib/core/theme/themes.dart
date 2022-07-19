@@ -3,6 +3,9 @@ import 'package:plazma/core/theme/colors.dart';
 
 ThemeData darkTheme = ThemeData(
   scaffoldBackgroundColor: ThemeColors.background,
+  drawerTheme: const DrawerThemeData(
+    backgroundColor: ThemeColors.background,
+  ),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     backgroundColor: Colors.transparent,
     elevation: 10,
