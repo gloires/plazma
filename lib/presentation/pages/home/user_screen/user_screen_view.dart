@@ -1,8 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:plazma/presentation/dialogs/change_avatar_dialog.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../../../widgets/language_dropdown.dart';
 import '../../../widgets/user_name_widget.dart';
 
 class UserScreenView extends StatelessWidget {
@@ -27,7 +31,7 @@ class UserScreenView extends StatelessWidget {
                       children: [
                         Align(
                           alignment: Alignment.center,
-                          child: Text('Settings', //TODO: text
+                          child: Text("settings.title".tr(),
                               style: TextStyle(
                                   color: Colors.white,
                                   fontFamily: 'KyivType',
@@ -49,26 +53,112 @@ class UserScreenView extends StatelessWidget {
                     ),
                   ],
                 ),
-                Container(
-                  height: 40.sp,
-                  width: 40.sp,
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/images/avatar.png'),
-                      fit: BoxFit.fill,
+                GestureDetector(
+                  onTap: () => showDialog(
+                      context: context,
+                      builder: (context) => const ChangeAvatarDialog()),
+                  child: Container(
+                    height: 40.sp,
+                    width: 40.sp,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/avatar.png'),
+                        fit: BoxFit.fill,
+                      ),
+                      shape: BoxShape.circle,
                     ),
-                    shape: BoxShape.circle,
                   ),
                 ),
                 const UserName(
                   initValue: 'User A.',
                 )
-
               ],
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 25),
+            padding: EdgeInsets.symmetric(vertical: 3.h),
+            child: Table(
+              border: null,
+              columnWidths: const <int, TableColumnWidth>{
+                0: FlexColumnWidth(),
+                1: FlexColumnWidth(),
+                2: FlexColumnWidth(),
+              },
+              defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+              children: <TableRow>[
+                TableRow(
+                  children: <Widget>[
+                    TableCell(
+                        verticalAlignment: TableCellVerticalAlignment.middle,
+                        child: Center(
+                            child: Text("1234/1235",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 17.sp,
+                                  fontFamily: 'Kyiv*Type',
+                                  fontWeight: FontWeight.w500,
+                                )))),
+                    TableCell(
+                        verticalAlignment: TableCellVerticalAlignment.middle,
+                        child: Center(
+                            child: Text("567/568",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 17.sp,
+                                  fontFamily: 'Kyiv*Type',
+                                  fontWeight: FontWeight.w500,
+                                )))),
+                    TableCell(
+                        verticalAlignment: TableCellVerticalAlignment.middle,
+                        child: Center(
+                            child: Text("23/25",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 17.sp,
+                                  fontFamily: 'Kyiv*Type',
+                                  fontWeight: FontWeight.w500,
+                                )))),
+                  ],
+                ),
+                TableRow(
+                  children: <Widget>[
+                    TableCell(
+                        verticalAlignment: TableCellVerticalAlignment.middle,
+                        child: Center(
+                            child: Text("settings.episodes".tr().toLowerCase(),
+                                style: TextStyle(
+                                  color: Colors.white.withOpacity(0.3),
+                                  fontSize: 17.sp,
+                                  fontFamily: 'KyivType',
+                                  fontWeight: FontWeight.w300,
+                                )))),
+                    TableCell(
+                        verticalAlignment: TableCellVerticalAlignment.middle,
+                        child: Center(
+                            child: Text("settings.hours".tr().toLowerCase(),
+                                style: TextStyle(
+                                  color: Colors.white.withOpacity(0.3),
+                                  fontSize: 17.sp,
+                                  fontFamily: 'KyivType',
+                                  fontWeight: FontWeight.w300,
+                                )))),
+                    TableCell(
+                        verticalAlignment: TableCellVerticalAlignment.middle,
+                        child: Center(
+                            child: Text("settings.days".tr().toLowerCase(),
+                                style: TextStyle(
+                                  color: Colors.white.withOpacity(0.3),
+                                  fontSize: 17.sp,
+                                  fontFamily: 'KyivType',
+                                  fontWeight: FontWeight.w300,
+                                )))),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 5.w),
             child: Divider(
               color: Colors.white.withOpacity(0.3),
             ),
@@ -106,21 +196,16 @@ class UserScreenView extends StatelessWidget {
                   PhosphorIcons.bookmarkSimpleLight,
                   color: Colors.white,
                 )),
-            title: const Text('Saved',
+            title: Text("settings.saved".tr(),
                 style: TextStyle(
                     color: Colors.white,
                     fontFamily: 'KyivType',
                     fontWeight: FontWeight.w400,
-                    fontSize: 16.0)),
+                    fontSize: 16.5.sp)),
             onTap: () => null,
           ),
           ListTile(
-            trailing: Text('English',
-                style: TextStyle(
-                    color: Colors.white.withOpacity(0.2),
-                    fontFamily: 'KyivType',
-                    fontWeight: FontWeight.w400,
-                    fontSize: 14.0)),
+            trailing: const LanguageDropdown(),
             leading: Container(
               height: 32,
               width: 32,
@@ -154,12 +239,12 @@ class UserScreenView extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            title: const Text('Language',
+            title: Text("settings.language".tr(),
                 style: TextStyle(
                     color: Colors.white,
                     fontFamily: 'KyivType',
                     fontWeight: FontWeight.w400,
-                    fontSize: 16.0)),
+                    fontSize: 16.5.sp)),
             onTap: () => null,
           ),
           ListTile(
@@ -196,12 +281,12 @@ class UserScreenView extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            title: const Text('Privacy & Policy',
+            title: Text("settings.privacy".tr(),
                 style: TextStyle(
                     color: Colors.white,
                     fontFamily: 'KyivType',
                     fontWeight: FontWeight.w400,
-                    fontSize: 16.0)),
+                    fontSize: 16.5.sp)),
             onTap: () => null,
           ),
           ListTile(
@@ -238,12 +323,12 @@ class UserScreenView extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            title: const Text('Help and Support',
+            title: Text("settings.help".tr(),
                 style: TextStyle(
                     color: Colors.white,
                     fontFamily: 'KyivType',
                     fontWeight: FontWeight.w400,
-                    fontSize: 16.0)),
+                    fontSize: 16.5.sp)),
             onTap: () => null,
           ),
           ListTile(
@@ -280,12 +365,12 @@ class UserScreenView extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            title: const Text('About',
+            title: Text("settings.about".tr(),
                 style: TextStyle(
                     color: Colors.white,
                     fontFamily: 'KyivType',
                     fontWeight: FontWeight.w400,
-                    fontSize: 16.0)),
+                    fontSize: 16.5.sp)),
             onTap: () => null,
           ),
           const Expanded(child: SizedBox.shrink()),

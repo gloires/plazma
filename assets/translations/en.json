@@ -13,6 +13,24 @@
     "afternoon": "Good Afternoon,",
     "evening": "Good Evening,"
   },
+  "settings": {
+    "title": "Settings",
+    "name": "Enter name",
+    "episodes": "Episodes",
+    "days": "Days",
+    "hours": "Hours",
+    "saved": "Saved",
+    "language": "Language",
+    "privacy": "Privacy & Policy",
+    "help": "Help and Support",
+    "about": "About",
+    "english": "English",
+    "ukrainian": "Ukrainian",
+    "russian": "Russian",
+    "camera": "Camera",
+    "gallery": "Gallery",
+    "action": "Select an action"
+  },
   "search_tab": {
     "title": "Search"
   },

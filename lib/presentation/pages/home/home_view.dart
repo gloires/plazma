@@ -1,4 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_indicator/loading_indicator.dart';
+import 'package:plazma/domain/entities/movie_entity.dart';
+import 'package:plazma/presentation/blocs/movie/movie_bloc.dart';
+import 'package:plazma/presentation/pages/home/popular_card.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
@@ -14,20 +19,22 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView>
     with SingleTickerProviderStateMixin {
+
   String? greeting;
   bool notification = true; //TODO: notification calendar
   final GlobalKey<ScaffoldState> _key = GlobalKey();
   late TabController _tabController;
 
+
   @override
   void initState() {
     _tabController = TabController(length: 3, vsync: this);
-    getCurrentTime();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    getCurrentTime();
     return Scaffold(
       key: _key,
       body: SingleChildScrollView(
@@ -36,13 +43,11 @@ class _HomeViewState extends State<HomeView>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding:
-                     EdgeInsets.only(top: 2.h, left: 5.w, right: 5.w),
+                padding: EdgeInsets.only(top: 2.h, left: 5.w, right: 5.w),
                 child: GestureDetector(
                   onTap: () {
                     QR.to('/user');
                     QR.currentPath;
-                    //_key.currentState!.openDrawer();
                   },
                   child: Row(
                     children: [
@@ -135,30 +140,50 @@ class _HomeViewState extends State<HomeView>
                   indicatorSize: TabBarIndicatorSize.tab,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: SizedBox(
-                  height: 200, //TODO
-                  child: TabBarView(
-                    controller: _tabController,
-                    children: [
-                      Container(
-                        color: Colors.grey,
-                        height: double.infinity,
-                        width: double.infinity,
+              SizedBox(
+                height: 200, //TODO
+                child: TabBarView(
+                  controller: _tabController,
+                  children: [
+                    BlocBuilder<MovieBloc, MovieState>(
+                      builder: (BuildContext context, state) {
+                        if(state is MovieLoadedState) {
+                          MovieEntity movieCard = state.movie;
+                          return PopularCard(movie: movieCard);
+                        }
+                        return  const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 135, vertical: 60),
+                          child: LoadingIndicator(
+                            colors: [ThemeColors.blueSelected],
+                            indicatorType: Indicator.lineScale,
+                            strokeWidth: 1,
+                            pause: false,
+                            // pathBackgroundColor: Colors.black45,
+                          ),
+                        );
+                      },
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 135, vertical: 60),
+                      child: LoadingIndicator(
+                        colors: [ThemeColors.blueSelected],
+                        indicatorType: Indicator.lineScale,
+                        strokeWidth: 1,
+                        pause: false,
+                        // pathBackgroundColor: Colors.black45,
                       ),
-                      Container(
-                        color: Colors.blueGrey,
-                        height: double.infinity,
-                        width: double.infinity,
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 135, vertical: 60),
+                      child: LoadingIndicator(
+                        colors: [ThemeColors.blueSelected],
+                        indicatorType: Indicator.lineScale,
+                        strokeWidth: 1,
+                        pause: false,
+                        // pathBackgroundColor: Colors.black45,
                       ),
-                      Container(
-                        color: Colors.grey,
-                        height: double.infinity,
-                        width: double.infinity,
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
               Padding(
@@ -223,17 +248,19 @@ class _HomeViewState extends State<HomeView>
 
   void getCurrentTime() {
     DateTime now = DateTime.now();
-    if (now.hour >= 00 && now.hour < 12) {
-      greeting = "greetings.morning".tr(); //TODO: text
-    } else if (now.hour >= 12 && now.hour < 16) {
-      greeting = "greetings.afternoon".tr();
-    } else if (now.hour >= 16 && now.hour < 24) {
-      greeting = "greetings.evening".tr();
-    }
+    setState(() {
+      if (now.hour >= 00 && now.hour < 12) {
+        greeting = "greetings.morning".tr(); //TODO: text
+      } else if (now.hour >= 12 && now.hour < 16) {
+        greeting = "greetings.afternoon".tr();
+      } else if (now.hour >= 16 && now.hour < 24) {
+        greeting = "greetings.evening".tr();
+      }
+    });
   }
 
   @override
-  void dispose(){
+  void dispose() {
     super.dispose();
     _tabController.dispose();
   }

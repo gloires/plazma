@@ -31,14 +31,23 @@ dependencies:
     sdk: flutter
 
   get: ^4.6.5
+  package_info_plus: ^1.4.3
   cupertino_icons: ^1.0.2
   ionicons: ^0.1.2
   phosphor_flutter: ^1.4.0
   qlevar_router: ^1.5.11
   easy_localization: ^3.0.1
   responsive_sizer: ^3.1.0
-  page_transition: ^2.0.9
-
+  dropdown_button2: ^1.6.3
+  flutter_svg: ^1.1.1+1
+  jovial_svg: ^1.1.5
+  modal_bottom_sheet: ^2.1.0
+  http: ^0.13.4
+  equatable: ^2.0.3
+  get_it: ^7.2.0
+  drop_shadow_image: ^0.9.0
+  flutter_bloc: ^8.0.1
+  loading_indicator: ^3.1.0
 
 dev_dependencies:
   flutter_test:
@@ -71,10 +80,15 @@ flutter:
           weight: 300
         - asset: assets/fonts/KyivTypeSans/KyivTypeSans-Regular.ttf
           weight: 400
+    - family: Kyiv*Type
+      fonts:
+        - asset: assets/fonts/KyivTypeSans/KyivTypeSans-Regular-.ttf
+          weight: 500
 
   assets:
       - assets/translations/
       - assets/images/
+      - assets/flags/
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

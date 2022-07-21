@@ -1,3 +1,4 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plazma/presentation/pages/bottom_navigation.dart';
 import 'package:plazma/presentation/pages/calendar/calendar_view.dart';
 import 'package:plazma/presentation/pages/library/library_view.dart';
@@ -5,6 +6,10 @@ import 'package:qlevar_router/qlevar_router.dart';
 
 import 'package:plazma/presentation/pages/home/home_view.dart';
 import 'package:plazma/presentation/pages/search/search_view.dart';
+
+import 'package:plazma/locator_service.dart';
+
+import 'package:plazma/presentation/blocs/movie/movie_bloc.dart';
 
 class InitialRoutes {
   static const String bottomNavBar = 'bottomNavBarRoute';
@@ -27,7 +32,11 @@ class InitialRoutes {
           path: '/home',
           name: tabs[0],
           pageType: const QFadePage(),
-          builder: () => const HomeView(),
+          builder: () => MultiBlocProvider(providers: [
+            BlocProvider(
+                lazy: false,
+                create: (context) => sl<MovieBloc>()..add(MovieLoadEvent(context: context)))
+          ], child: HomeView()),
         ),
         QRoute(
           path: '/search',

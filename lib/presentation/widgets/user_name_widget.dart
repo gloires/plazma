@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -47,8 +48,9 @@ class _UserNameState extends State<UserName> {
             fontSize: 18.0.sp),
         decoration: InputDecoration(
           contentPadding: EdgeInsets.zero,
-          //isDense: true,
-          hintText: "Email", //TODO: text
+          isDense: true,
+          hintText: "settings.name".tr(),
+          hintStyle: TextStyle(color: Colors.white.withOpacity(0.3)),
           suffix: changed
               ? const Icon(PhosphorIcons.check, color: Colors.white,) //TODO: save click | color
               : null,
