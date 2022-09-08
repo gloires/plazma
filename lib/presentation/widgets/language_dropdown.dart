@@ -41,7 +41,8 @@ class _LanguageDropdownState extends State<LanguageDropdown> {
         child: DropdownButton2(
           isExpanded: true,
           items: items
-              .map((item) => DropdownMenuItem<String>(
+              .map(
+                (item) => DropdownMenuItem<String>(
                   value: item.code,
                   child: Row(
                     children: [
@@ -50,13 +51,14 @@ class _LanguageDropdownState extends State<LanguageDropdown> {
                           height: 25,
                           width: 25,
                           child: ClipRRect(
-                              borderRadius: BorderRadius.circular(12),
-                              child: ScalableImageWidget.fromSISource(
-                                si: ScalableImageSource.fromSvg(
-                                  DefaultAssetBundle.of(context),
-                                  item.icon,
-                                ),
-                              )),
+                            borderRadius: BorderRadius.circular(12),
+                            child: ScalableImageWidget.fromSISource(
+                              si: ScalableImageSource.fromSvg(
+                                DefaultAssetBundle.of(context),
+                                item.icon,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                       const SizedBox(
@@ -73,17 +75,22 @@ class _LanguageDropdownState extends State<LanguageDropdown> {
                         overflow: TextOverflow.ellipsis,
                       ),
                     ],
-                  )))
+                  ),
+                ),
+              )
               .toList(),
-
           value: _language,
           onChanged: (value) {
-            setState(() {
-              _language = value as String;
-              setState(() {
-                EasyLocalization.of(context)?.setLocale(Locale(value));
-              });
-            });
+            setState(
+              () {
+                _language = value as String;
+                setState(
+                  () {
+                    EasyLocalization.of(context)?.setLocale(Locale(value));
+                  },
+                );
+              },
+            );
           },
           customButton: (Text(_title,
               style: TextStyle(

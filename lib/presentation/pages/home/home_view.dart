@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:plazma/domain/entities/movie_entity.dart';
-import 'package:plazma/presentation/blocs/movie/movie_bloc.dart';
+import 'package:plazma/presentation/bloc/movie/movie_bloc.dart';
 import 'package:plazma/presentation/pages/home/popular_card.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter/material.dart';

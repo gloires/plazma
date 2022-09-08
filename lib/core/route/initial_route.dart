@@ -9,7 +9,7 @@ import 'package:plazma/presentation/pages/search/search_view.dart';
 
 import 'package:plazma/locator_service.dart';
 
-import 'package:plazma/presentation/blocs/movie/movie_bloc.dart';
+import 'package:plazma/presentation/bloc/movie/movie_bloc.dart';
 
 class InitialRoutes {
   static const String bottomNavBar = 'bottomNavBarRoute';

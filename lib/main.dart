@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:plazma/presentation/blocs/movie/movie_bloc.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 import 'package:plazma/core/theme/themes.dart';
 import 'package:plazma/core/route/route.dart';
@@ -48,7 +47,7 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   runApp(
     EasyLocalization(
-        supportedLocales: const [Locale('en'), Locale('ru'), Locale('uk')],
+        supportedLocales: const [Locale('en'), Locale('uk')],
         path: 'assets/translations',
         fallbackLocale: const Locale('en'),
         startLocale: const Locale('en'),

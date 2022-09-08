@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:plazma/data/datasources/api/movie_api.dart';
+import 'package:plazma/data/movies/datasources/api/movie_api.dart';
 import 'package:plazma/domain/entities/movie_entity.dart';
 import 'package:plazma/domain/repositories/movie_repository.dart';
 

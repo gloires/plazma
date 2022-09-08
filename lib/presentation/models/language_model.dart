@@ -14,7 +14,6 @@ class Language {
     return <Language> [
       Language(1, "en", "assets/flags/en.svg", "settings.english".tr()),
       Language(2, "uk", "assets/flags/ua.svg", "settings.ukrainian".tr()),
-      Language(3, "ru", "assets/flags/ru.svg", "settings.russian".tr()),
     ];
   }
 }

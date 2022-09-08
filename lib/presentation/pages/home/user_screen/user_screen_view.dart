@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:plazma/presentation/dialogs/change_avatar_dialog.dart';
 import 'package:qlevar_router/qlevar_router.dart';
@@ -245,7 +244,6 @@ class UserScreenView extends StatelessWidget {
                     fontFamily: 'KyivType',
                     fontWeight: FontWeight.w400,
                     fontSize: 16.5.sp)),
-            onTap: () => null,
           ),
           ListTile(
             leading: Container(

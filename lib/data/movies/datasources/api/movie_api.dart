@@ -5,7 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:plazma/core/theme/const.dart';
-import 'package:plazma/data/models/movie_model.dart';
+import 'package:plazma/data/movies/models/movie_model.dart';
 
 abstract class MovieApi {
   Future<MovieModel> getPopularMovie(BuildContext context);
@@ -28,11 +28,11 @@ class MovieApiImpl implements MovieApi {
     List<dynamic> data = jsonData["results"];
     if (response.statusCode == 200) {
       MovieModel movie = MovieModel(
-          id: data[0]["id"],
+          id: data[3]["id"],
           // title: randomNumber == 1 ? data[0]["title"] : data[0]["name"],
-          title: data[0]["title"],
-          posterPath: data[0]["poster_path"],
-          overview: data[0]["overview"]);
+          title: data[3]["title"],
+          posterPath: data[3]["poster_path"],
+          overview: data[3]["overview"]);
       return movie;
     } else {
       throw Exception('Failed to load movie'); //TODO: text
