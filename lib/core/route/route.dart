@@ -1,7 +1,10 @@
 import 'package:flutter/animation.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:plazma/presentation/bloc/user/user_bloc.dart';
 import 'package:plazma/presentation/pages/home/user_screen/user_screen_view.dart';
 import 'package:qlevar_router/qlevar_router.dart';
+import '../../locator_service.dart';
 import '../../presentation/pages/splashscreen/splash_view.dart';
 import 'initial_route.dart';
 
@@ -35,12 +38,15 @@ class AppRoutes {
     ), */
     InitialRoutes().route,
     QRoute(
-        path: '/user',
-        pageType: const QSlidePage(
+      path: '/user',
+      pageType: const QSlidePage(
           offset: Offset(0, 1),
           transitionDurationMilliseconds: 300,
-          reverseTransitionDurationMilliseconds: 200
-        ),
-        builder: () => const UserScreenView())
+          reverseTransitionDurationMilliseconds: 200),
+      builder: () => BlocProvider.value(
+        value: sl<UserBloc>()..add(UserGetEvent()),
+        child: const UserScreenView(),
+      ),
+    ),
   ];
 }

@@ -11,6 +11,8 @@ import 'package:plazma/locator_service.dart';
 
 import 'package:plazma/presentation/bloc/movie/movie_bloc.dart';
 
+import '../../presentation/bloc/user/user_bloc.dart';
+
 class InitialRoutes {
   static const String bottomNavBar = 'bottomNavBarRoute';
   static const tabs = [
@@ -32,11 +34,7 @@ class InitialRoutes {
           path: '/home',
           name: tabs[0],
           pageType: const QFadePage(),
-          builder: () => MultiBlocProvider(providers: [
-            BlocProvider(
-                lazy: false,
-                create: (context) => sl<MovieBloc>()..add(MovieLoadEvent(context: context)))
-          ], child: HomeView()),
+          builder: () => const HomeView(),
         ),
         QRoute(
           path: '/search',

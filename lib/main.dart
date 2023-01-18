@@ -45,15 +45,21 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await init();
   await EasyLocalization.ensureInitialized();
-  runApp(
-    EasyLocalization(
+  BlocOverrides.runZoned(
+    () => runApp(
+      EasyLocalization(
         supportedLocales: const [Locale('en'), Locale('uk')],
         path: 'assets/translations',
         fallbackLocale: const Locale('en'),
         startLocale: const Locale('en'),
-        child: ResponsiveSizer(builder: (context, orientation, screenType) {
-          return const PlazmaApp();
-        })),
+        child: ResponsiveSizer(
+          builder: (context, orientation, screenType) {
+            return const PlazmaApp();
+          },
+        ),
+      ),
+    ),
+    blocObserver: SimpleBlocObserver(),
   );
 }
 
@@ -63,16 +69,14 @@ class PlazmaApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appRoutes = AppRoutes();
-    appRoutes.setup();
+    // appRoutes.setup();
     return MaterialApp.router(
-        localizationsDelegates: context.localizationDelegates,
-        supportedLocales: context.supportedLocales,
-        locale: context.locale,
-        routeInformationParser: const QRouteInformationParser(),
-    routerDelegate: QRouterDelegate(
-    appRoutes.routes, initPath: '/dashboard'
-    ),
-    theme: darkTheme,
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
+      routeInformationParser: const QRouteInformationParser(),
+      routerDelegate: QRouterDelegate(appRoutes.routes, initPath: '/dashboard'),
+      theme: darkTheme,
     );
   }
 }
