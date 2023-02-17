@@ -4,8 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plazma/presentation/bloc/user/user_bloc.dart';
 import 'package:plazma/presentation/pages/home/user_screen/user_screen_view.dart';
 import 'package:qlevar_router/qlevar_router.dart';
-import '../../locator_service.dart';
-import '../../presentation/pages/splashscreen/splash_view.dart';
+import 'package:plazma/locator_service.dart';
 import 'initial_route.dart';
 
 class AppRoutes {
@@ -24,25 +23,14 @@ class AppRoutes {
   }
 
   final routes = <QRoute>[
-    /* QRoute(
-      path: '/',
-      name: root,
-      middleware: [
-        QMiddlewareBuilder(
-          redirectGuardFunc: (_) async {
-            return '/dashboard'; //TODO: splash screen
-          },
-        )
-      ],
-      builder: () => const SplashView(),
-    ), */
     InitialRoutes().route,
     QRoute(
       path: '/user',
       pageType: const QSlidePage(
-          offset: Offset(0, 1),
-          transitionDurationMilliseconds: 300,
-          reverseTransitionDurationMilliseconds: 200),
+        offset: Offset(0, 1),
+        transitionDuration: Duration(milliseconds: 300),
+        reverseTransitionDuration: Duration(milliseconds: 200),
+      ),
       builder: () => BlocProvider.value(
         value: sl<UserBloc>()..add(UserGetEvent()),
         child: const UserScreenView(),

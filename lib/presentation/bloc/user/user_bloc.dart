@@ -28,11 +28,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<UserEditEvent>(_onUserEditEvent);
   }
 
-  @override
-  Future<void> close() async {
-    super.close();
-  }
-
   FutureOr<void> _onUserInitialEvent(
       UserInitialEvent event,
       Emitter<UserState> emit,
@@ -59,5 +54,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     );
     updateUser(userEdited);
     emit(UserEditedState());
+    add(UserGetEvent());
   }
 }

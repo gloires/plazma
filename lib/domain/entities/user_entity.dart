@@ -1,4 +1,7 @@
+import 'dart:io';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
 
 class UserEntity extends Equatable {
   final int id;
@@ -13,8 +16,8 @@ class UserEntity extends Equatable {
 
   factory UserEntity.empty() {
     return const UserEntity(
-      name: "User",
-      imagePath: "assets/images/avatar.png",
+      name: "",
+      imagePath: "",
     );
   }
 

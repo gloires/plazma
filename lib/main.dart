@@ -69,7 +69,6 @@ class PlazmaApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appRoutes = AppRoutes();
-    // appRoutes.setup();
     return MaterialApp.router(
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,

@@ -1,6 +1,8 @@
+import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:plazma/presentation/bloc/user/user_bloc.dart';
 import 'package:plazma/presentation/widgets/user/user_name_widget.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -13,8 +15,8 @@ class UserInformationPart extends StatefulWidget {
 }
 
 class _UserInformationPartState extends State<UserInformationPart> {
-  String _name = "User";
-  String _imagePath = 'assets/images/avatar.png';
+  String _name = "";
+  String _imagePath = '';
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +25,7 @@ class _UserInformationPartState extends State<UserInformationPart> {
       children: [
         BlocBuilder<UserBloc, UserState>(
           buildWhen: (previous, current) {
-            return (current is UserLoadedState ||
-                current is UserEmptyState);
+            return (current is UserLoadedState || current is UserEmptyState);
           },
           builder: (context, state) {
             if (state is UserLoadedState) {
@@ -34,18 +35,27 @@ class _UserInformationPartState extends State<UserInformationPart> {
             return Column(
               children: [
                 GestureDetector(
-                  onTap: null,
+                  onTap: () async {
+                    XFile? result = await ImagePicker()
+                        .pickImage(source: ImageSource.gallery);
+                    setState(() {
+                      userBloc.add(UserEditEvent(imagePath: result!.path));
+                    });
+                  },
                   child: Container(
                     height: 40.sp,
                     width: 40.sp,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage(_imagePath),
+                        image: FileImage(File(_imagePath)),
                         fit: BoxFit.fill,
                       ),
                       shape: BoxShape.circle,
                     ),
                   ),
+                ),
+                const SizedBox(
+                  height: 15,
                 ),
                 UserName(
                   initValue: _name,

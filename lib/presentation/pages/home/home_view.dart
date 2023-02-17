@@ -1,6 +1,6 @@
 import 'package:plazma/presentation/pages/home/my_library_part.dart';
 import 'package:plazma/presentation/pages/home/popular_part.dart';
-import 'package:plazma/presentation/pages/home/user_part.dart';
+import 'package:plazma/presentation/pages/home/home_user_part/user_part.dart';
 import 'package:plazma/presentation/pages/home/watching_part.dart';
 import 'package:flutter/material.dart';
 

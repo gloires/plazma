@@ -8,8 +8,6 @@ class Language {
 
   Language(this.id, this.code, this.icon, this.title);
 
-  //TODO: text
-
   static List<Language> languages() {
     return <Language> [
       Language(1, "en", "assets/flags/en.svg", "settings.english".tr()),

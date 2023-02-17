@@ -24,7 +24,7 @@ class UserDatasourceImpl implements UserDatasource {
     """,
       [
         "User",
-        "assets/images/avatar.png",
+        "assets/images/avatar.png", //TODO: image for user part assets and files
       ],
     );
   }
