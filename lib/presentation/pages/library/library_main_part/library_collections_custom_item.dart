@@ -1,12 +1,16 @@
 import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:plazma/core/theme/colors.dart';
 import 'package:plazma/domain/entities/collection_entity.dart';
+import 'package:plazma/presentation/bloc/collections/collections_bloc.dart';
+import 'package:plazma/presentation/dialogs/library/edit_collection_dialog.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class LibraryCollectionsCustomItem extends StatelessWidget {
+  final CollectionsBloc collectionsBloc;
   final double size;
   final CollectionEntity collection;
 
@@ -14,6 +18,7 @@ class LibraryCollectionsCustomItem extends StatelessWidget {
     Key? key,
     required this.size,
     required this.collection,
+    required this.collectionsBloc,
   }) : super(key: key);
 
   @override
@@ -70,7 +75,7 @@ class LibraryCollectionsCustomItem extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "${collection.count} ${"add_collection.items".tr()}",
+                  "${collection.count} ${"collection.items".tr()}",
                   style: TextStyle(
                     color: Colors.white.withOpacity(0.5),
                     fontFamily: 'KyivType',
@@ -82,10 +87,20 @@ class LibraryCollectionsCustomItem extends StatelessWidget {
             ),
           ),
           const Expanded(child: SizedBox.shrink()),
-          Icon( //TODO: click dots and change icon to more proper one
-            PhosphorIcons.dotsThreeVerticalBold,
-            color: Colors.white,
-            size: 20.sp,
+          IconButton(
+            onPressed: () => showCupertinoModalBottomSheet(
+              context: context,
+              builder: (context) => EditCollectionDialog(
+                collection: collection,
+                collectionsBloc: collectionsBloc,
+              ),
+            ),
+            icon: Icon(
+              //TODO: click dots and change icon to more proper one
+              PhosphorIcons.dotsThreeVerticalBold,
+              color: Colors.white,
+              size: 20.sp,
+            ),
           ),
         ],
       ),

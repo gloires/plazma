@@ -9,7 +9,13 @@ class AddCollection {
     required String name,
     required String description,
     required bool private,
+    required String logoPath,
   }) async {
-    await collectionsRepository.add(name, description, private);
+    await collectionsRepository.add(
+      name,
+      description,
+      private,
+      logoPath,
+    );
   }
 }

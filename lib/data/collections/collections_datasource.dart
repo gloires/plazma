@@ -8,6 +8,7 @@ abstract class CollectionsDatasource {
     String name,
     String description,
     int private,
+    String logoPath,
   );
 
   Future<void> delete(int collectionID);
@@ -32,7 +33,7 @@ class CollectionsDatasourceImpl implements CollectionsDatasource {
 
     List<Map> list = await database.rawQuery("""
       SELECT
-        collections.title, collections.description, collections.logo_path, collections.private
+        collections.id, collections.title, collections.description, collections.logo_path, collections.private
       FROM
         collections
       ORDER BY
@@ -54,14 +55,21 @@ class CollectionsDatasourceImpl implements CollectionsDatasource {
     return result;
   }
 
+  //TODO: get collection
+
   @override
-  Future<void> add(String name, String description, int private) async {
+  Future<void> add(
+    String name,
+    String description,
+    int private,
+    String logoPath,
+  ) async {
     await database.rawInsert(
       '''
-          INSERT INTO collections(title, description, private)
-          VALUES(?, ?, ?)
+          INSERT INTO collections(title, description, private, logo_path)
+          VALUES(?, ?, ?, ?)
       ''',
-      [name, description, private],
+      [name, description, private, logoPath],
     );
   }
 

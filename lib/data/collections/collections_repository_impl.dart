@@ -16,9 +16,19 @@ class CollectionsRepositoryImpl implements CollectionsRepository {
   }
 
   @override
-  Future<void> add(String name, String description, bool private) async {
+  Future<void> add(
+    String name,
+    String description,
+    bool private,
+    String logoPath,
+  ) async {
     int privateToInt = private ? 0 : 1;
-    await collectionsDatasource.add(name, description, privateToInt);
+    await collectionsDatasource.add(
+      name,
+      description,
+      privateToInt,
+      logoPath,
+    );
   }
 
   @override

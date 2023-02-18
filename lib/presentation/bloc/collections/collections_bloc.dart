@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plazma/domain/entities/collection_entity.dart';
-import 'package:plazma/domain/entities/user_entity.dart';
 import 'package:plazma/domain/usecases/collections/add_collection.dart';
 import 'package:plazma/domain/usecases/collections/delete_collection.dart';
 import 'package:plazma/domain/usecases/collections/get_collections.dart';
@@ -31,28 +30,39 @@ class CollectionsBloc extends Bloc<CollectionsEvent, CollectionsState> {
     on<CollectionsEditEvent>(_onCollectionsEditEvent);
   }
 
-  FutureOr<void> _onCollectionsGetListEvent(CollectionsGetListEvent event,
-      Emitter<CollectionsState> emit,) async {
+  FutureOr<void> _onCollectionsGetListEvent(
+    CollectionsGetListEvent event,
+    Emitter<CollectionsState> emit,
+  ) async {
     final collections = await getCollections();
     emit(CollectionsListLoadedState(collections: collections));
   }
 
-  FutureOr<void> _onCollectionsAddEvent(CollectionsAddEvent event,
-      Emitter<CollectionsState> emit,) async {
+  FutureOr<void> _onCollectionsAddEvent(
+    CollectionsAddEvent event,
+    Emitter<CollectionsState> emit,
+  ) async {
     await addCollection(
-        name: event.name, description: event.description, private: event.private
+      name: event.name,
+      description: event.description,
+      private: event.private,
+      logoPath: event.logoPath,
     );
     add(CollectionsGetListEvent());
   }
 
-  FutureOr<void> _onCollectionsDeleteEvent(CollectionsDeleteEvent event,
-      Emitter<CollectionsState> emit,) async {
+  FutureOr<void> _onCollectionsDeleteEvent(
+    CollectionsDeleteEvent event,
+    Emitter<CollectionsState> emit,
+  ) async {
     await deleteCollection(event.id);
     add(CollectionsGetListEvent());
   }
 
-  FutureOr<void> _onCollectionsEditEvent(CollectionsEditEvent event,
-      Emitter<CollectionsState> emit,) async {
+  FutureOr<void> _onCollectionsEditEvent(
+    CollectionsEditEvent event,
+    Emitter<CollectionsState> emit,
+  ) async {
     await updateCollection(
       id: event.id,
       name: event.name,
@@ -61,5 +71,6 @@ class CollectionsBloc extends Bloc<CollectionsEvent, CollectionsState> {
       private: event.private,
     );
     add(CollectionsGetListEvent());
+    emit(CollectionsEditedState());
   }
 }

@@ -41,7 +41,6 @@ dependencies:
   dropdown_button2: ^1.6.3
   flutter_svg: ^1.1.1+1
   jovial_svg: ^1.1.5
-  modal_bottom_sheet: ^2.1.0
   http: ^0.13.4
   equatable: ^2.0.3
   get_it: ^7.2.0
@@ -51,6 +50,12 @@ dependencies:
   sqflite: ^2.2.3
   image_picker: ^0.8.6+1
   path_provider: ^2.0.12
+
+dependency_overrides:
+  modal_bottom_sheet:
+    git:
+      url: https://github.com/danReynolds/modal_bottom_sheet.git
+      path: modal_bottom_sheet
 
 dev_dependencies:
   flutter_test:

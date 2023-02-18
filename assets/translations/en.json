@@ -43,7 +43,7 @@
     "my_collections": "My Collections",
     "new_collection": "New collection"
   },
-  "add_collection": {
+  "collection": {
     "name": "Name",
     "name_collection": "Name of collection",
     "description": "Description",
@@ -54,7 +54,11 @@
     "link_desc": "Access only for users with the link",
     "cancel": "Cancel",
     "create": "Create",
-    "items": "items"
+    "items": "items",
+    "edit": "Edit collection",
+    "share": "Share",
+    "delete": "Delete collection"
+
   },
   "calendar_tab": {
     "title": "Calendar"

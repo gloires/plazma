@@ -43,7 +43,7 @@
     "my_collections": "Мої Колекції",
     "new_collection": "Нова колекція"
   },
-  "add_collection": {
+  "collection": {
     "name": "Назва",
     "name_collection": "Назва колекції",
     "description": "Опис",
@@ -54,7 +54,10 @@
     "link_desc": "Доступ для користувачів з посиланням",
     "cancel": "Відмінити",
     "create": "Створити",
-    "items": "елементів"
+    "items": "елементів",
+    "edit": "Редагувати колекцію",
+    "share": "Поділитися",
+    "delete": "Видалити колекцію"
   },
   "calendar_tab": {
     "title": "Календар"

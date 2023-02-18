@@ -19,3 +19,5 @@ class CollectionsListLoadedState extends CollectionsState {
   @override
   List<Object> get props => [collections];
 }
+
+class CollectionsEditedState extends CollectionsState {}

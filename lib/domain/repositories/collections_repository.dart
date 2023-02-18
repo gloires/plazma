@@ -7,6 +7,7 @@ abstract class CollectionsRepository {
     String name,
     String description,
     bool private,
+    String logoPath,
   );
 
   Future<void> delete(int collectionID);

@@ -156,7 +156,7 @@ Future<void> init() async {
       );
       await db.execute("""
       CREATE TABLE collections (
-        id INTEGER PRIMARY KEY AUTOINCREMENT, 
+        id INTEGER PRIMARY KEY, 
         title TEXT,
         description TEXT,
         logo_path TEXT,

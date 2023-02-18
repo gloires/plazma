@@ -350,12 +350,13 @@ packages:
     source: hosted
     version: "1.8.0"
   modal_bottom_sheet:
-    dependency: "direct main"
+    dependency: "direct overridden"
     description:
-      name: modal_bottom_sheet
-      sha256: ef533916a2c3089571c32bd34e410faca77a6849a3f28f748e0794525c5658a0
-      url: "https://pub.dev"
-    source: hosted
+      path: modal_bottom_sheet
+      ref: HEAD
+      resolved-ref: d79185a564c6d1b1535568ea7dfef060e20a049d
+      url: "https://github.com/danReynolds/modal_bottom_sheet.git"
+    source: git
     version: "2.1.2"
   nested:
     dependency: transitive

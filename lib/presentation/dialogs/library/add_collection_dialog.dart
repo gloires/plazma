@@ -1,5 +1,7 @@
+import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:plazma/core/theme/colors.dart';
 import 'package:plazma/presentation/bloc/collections/collections_bloc.dart';
@@ -25,6 +27,8 @@ class _AddCollectionDialogState extends State<AddCollectionDialog> {
 
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
+
+  String _imagePath = "";
 
   int selected = 0;
 
@@ -84,6 +88,58 @@ class _AddCollectionDialogState extends State<AddCollectionDialog> {
                   SizedBox(
                     height: 30,
                   ), //TODO: delete later
+                  Center(
+                    child: GestureDetector(
+                      onTap: () async {
+                        XFile? result = await ImagePicker()
+                            .pickImage(source: ImageSource.gallery);
+                        setState(
+                          () {
+                            _imagePath = result!.path;
+                            // widget.collectionsBloc.add(
+                            //   CollectionsAddEvent(
+                            //     name: _nameController.text,
+                            //     description: _descriptionController.text,
+                            //     private: selected == 0
+                            //         ? true
+                            //         : false, //TODO: change bool to int
+                            //   ),
+                            // );
+                            //colle.add(UserEditEvent(imagePath: result!.path));
+                          },
+                        );
+                      },
+                      child: _imagePath.isEmpty
+                          ? Container(
+                              height: 90,
+                              width: 90,
+                              decoration: const BoxDecoration(
+                                color: ThemeColors.collectionButton,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Icon(
+                                PhosphorIcons.plus,
+                                color: Colors.white,
+                                size: 23.sp,
+                              ),
+                            )
+                          : Container(
+                              height: 90,
+                              width: 90,
+                              decoration: BoxDecoration(
+                                color: ThemeColors.collectionButton,
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                    image: FileImage(
+                                  File(_imagePath),
+                                )),
+                              ),
+                            ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ), //TODO: delete later
                   SizedBox(
                     height: 6.5.h,
                     child: TextField(
@@ -96,8 +152,8 @@ class _AddCollectionDialogState extends State<AddCollectionDialog> {
                         fontSize: 16.0.sp,
                       ),
                       decoration: InputDecoration(
-                        labelText: "add_collection.name".tr(),
-                        hintText: "add_collection.name_collection".tr(),
+                        labelText: "collection.name".tr(),
+                        hintText: "collection.name_collection".tr(),
                         labelStyle: TextStyle(
                           color: _nameNode.hasFocus
                               ? ThemeColors.blueSelected
@@ -133,8 +189,8 @@ class _AddCollectionDialogState extends State<AddCollectionDialog> {
                         fontSize: 16.0.sp,
                       ),
                       decoration: InputDecoration(
-                        labelText: "add_collection.description".tr(),
-                        hintText: "add_collection.description".tr(),
+                        labelText: "collection.description".tr(),
+                        hintText: "collection.description".tr(),
                         labelStyle: TextStyle(
                           color: _descriptionNode.hasFocus
                               ? ThemeColors.blueSelected
@@ -162,7 +218,7 @@ class _AddCollectionDialogState extends State<AddCollectionDialog> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "add_collection.confidentiality".tr(),
+                        "collection.confidentiality".tr(),
                         style: TextStyle(
                           color: ThemeColors.dialogHintColor,
                           fontFamily: 'KyivType',
@@ -175,8 +231,8 @@ class _AddCollectionDialogState extends State<AddCollectionDialog> {
                       ), //TODO: delete later
                       CollectionsPrivateAccess(
                         icon: PhosphorIcons.lockKey,
-                        title: "add_collection.private".tr(),
-                        subtitle: "add_collection.private_desc".tr(),
+                        title: "collection.private".tr(),
+                        subtitle: "collection.private_desc".tr(),
                         selected: selected,
                         index: 0,
                         onPressed: () {
@@ -190,8 +246,8 @@ class _AddCollectionDialogState extends State<AddCollectionDialog> {
                       ), //TODO: delete later
                       CollectionsPrivateAccess(
                         icon: PhosphorIcons.link,
-                        title: "add_collection.link".tr(),
-                        subtitle: "add_collection.link_desc".tr(),
+                        title: "collection.link".tr(),
+                        subtitle: "collection.link_desc".tr(),
                         selected: selected,
                         index: 1,
                         onPressed: () {
@@ -217,14 +273,17 @@ class _AddCollectionDialogState extends State<AddCollectionDialog> {
                               CollectionsAddEvent(
                                 name: _nameController.text,
                                 description: _descriptionController.text,
-                                private: selected == 0 ? true : false, //TODO: change bool to int
+                                private: selected == 0
+                                    ? true
+                                    : false, //TODO: change bool to int
+                                logoPath: _imagePath,
                               ),
                             );
                             QR.back();
                           }
                         },
                         child: Text(
-                          "add_collection.create".tr(),
+                          "collection.create".tr(),
                           style: TextStyle(
                             color: _nameController.text.isEmpty
                                 ? ThemeColors.dialogHintColor

@@ -93,6 +93,7 @@ class _LibraryCollectionsState extends State<LibraryCollections> {
                   return LibraryCollectionsCustomItem(
                     collection: collection,
                     size: _collectionSize,
+                    collectionsBloc: collectionsBloc,
                   );
                 },
               );
