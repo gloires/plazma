@@ -2,7 +2,6 @@ import 'package:plazma/data/user/user_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 abstract class UserDatasource {
-  Future<int> initial();
 
   Future<UserModel> getUserInformation();
 
@@ -13,21 +12,6 @@ class UserDatasourceImpl implements UserDatasource {
   final Database database;
 
   UserDatasourceImpl({required this.database});
-
-  @override
-  Future<int> initial() async {
-    return await database.rawInsert(
-      """
-    INSERT INTO 
-      user(name, image_path)
-    VALUES(?,?)
-    """,
-      [
-        "User",
-        "assets/images/avatar.png", //TODO: image for user part assets and files
-      ],
-    );
-  }
 
   @override
   Future<UserModel> getUserInformation() async {

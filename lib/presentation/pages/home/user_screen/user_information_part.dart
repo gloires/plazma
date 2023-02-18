@@ -1,9 +1,9 @@
-import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:plazma/presentation/bloc/user/user_bloc.dart';
+import 'package:plazma/presentation/widgets/user/user_avatar.dart';
 import 'package:plazma/presentation/widgets/user/user_name_widget.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -42,16 +42,9 @@ class _UserInformationPartState extends State<UserInformationPart> {
                       userBloc.add(UserEditEvent(imagePath: result!.path));
                     });
                   },
-                  child: Container(
-                    height: 40.sp,
-                    width: 40.sp,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: FileImage(File(_imagePath)),
-                        fit: BoxFit.fill,
-                      ),
-                      shape: BoxShape.circle,
-                    ),
+                  child: UserAvatar(
+                    size: 40.sp,
+                    image: _imagePath,
                   ),
                 ),
                 const SizedBox(
@@ -82,7 +75,7 @@ class _UserInformationPartState extends State<UserInformationPart> {
                     verticalAlignment: TableCellVerticalAlignment.middle,
                     child: Center(
                       child: Text(
-                        "1234/1235",
+                        "1234/1235", //TODO: watched episodes
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 17.sp,

@@ -19,9 +19,4 @@ class UserRepositoryImpl implements UserRepository {
   Future<void> update(UserEntity user) async {
     await userDatasource.update(UserModel.fromEntity(user));
   }
-
-  @override
-  Future<int> initial() async {
-    return await userDatasource.initial();
-  }
 }

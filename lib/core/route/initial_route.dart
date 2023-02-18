@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:plazma/presentation/bloc/collections/collections_bloc.dart';
 import 'package:plazma/presentation/pages/bottom_navigation.dart';
 import 'package:plazma/presentation/pages/calendar/calendar_view.dart';
 import 'package:plazma/presentation/pages/library/library_view.dart';
@@ -45,7 +46,10 @@ class InitialRoutes {
           path: '/library',
           name: tabs[2],
           pageType: const QFadePage(),
-          builder: () => const LibraryView(),
+          builder: () => BlocProvider.value(
+            value: sl<CollectionsBloc>()..add(CollectionsGetListEvent()),
+            child: const LibraryView(),
+          ),
         ),
         QRoute(
           path: '/calendar',

@@ -1,7 +1,4 @@
-import 'dart:io';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/services.dart';
-import 'package:path_provider/path_provider.dart';
 
 class UserEntity extends Equatable {
   final int id;

@@ -26,7 +26,6 @@
     "about": "About",
     "english": "English",
     "ukrainian": "Ukrainian",
-    "russian": "Russian",
     "camera": "Camera",
     "gallery": "Gallery",
     "action": "Select an action"
@@ -35,7 +34,27 @@
     "title": "Search"
   },
   "library_tab": {
-    "title": "Library"
+    "title": "Library",
+    "my_library": "My library",
+    "movies": "Movies",
+    "tv_shows": "TV Shows",
+    "anime": "Anime",
+    "cartoons": "Cartoons",
+    "my_collections": "My Collections",
+    "new_collection": "New collection"
+  },
+  "add_collection": {
+    "name": "Name",
+    "name_collection": "Name of collection",
+    "description": "Description",
+    "confidentiality": "Confidentiality",
+    "private": "Private",
+    "private_desc": "Access only for you",
+    "link": "Link access",
+    "link_desc": "Access only for users with the link",
+    "cancel": "Cancel",
+    "create": "Create",
+    "items": "items"
   },
   "calendar_tab": {
     "title": "Calendar"

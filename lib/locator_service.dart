@@ -1,14 +1,21 @@
 import 'package:get_it/get_it.dart';
+import 'package:plazma/data/collections/collections_datasource.dart';
+import 'package:plazma/data/collections/collections_repository_impl.dart';
 import 'package:plazma/data/movies/datasources/api/movie_api.dart';
 import 'package:plazma/data/repositories/movie_repository_impl.dart';
 import 'package:plazma/data/user/user_datasource.dart';
 import 'package:plazma/data/user/user_repository_impl.dart';
+import 'package:plazma/domain/repositories/collections_repository.dart';
 import 'package:plazma/domain/repositories/movie_repository.dart';
 import 'package:plazma/domain/repositories/user_repository.dart';
+import 'package:plazma/domain/usecases/collections/add_collection.dart';
+import 'package:plazma/domain/usecases/collections/delete_collection.dart';
+import 'package:plazma/domain/usecases/collections/get_collections.dart';
+import 'package:plazma/domain/usecases/collections/update_collection.dart';
 import 'package:plazma/domain/usecases/movies/get_popular_movie.dart';
 import 'package:plazma/domain/usecases/user/get_user.dart';
-import 'package:plazma/domain/usecases/user/initial_user.dart';
 import 'package:plazma/domain/usecases/user/update_user.dart';
+import 'package:plazma/presentation/bloc/collections/collections_bloc.dart';
 import 'package:plazma/presentation/bloc/movie/movie_bloc.dart';
 import 'package:plazma/presentation/bloc/user/user_bloc.dart';
 import 'package:sqflite/sqflite.dart';
@@ -26,13 +33,43 @@ Future<void> init() async {
 
   sl.registerLazySingleton(
     () => UserBloc(
-      initialUser: sl(),
       getUser: sl(),
       updateUser: sl(),
     ),
   );
 
+  sl.registerLazySingleton(
+    () => CollectionsBloc(
+      getCollections: sl(),
+      addCollection: sl(),
+      deleteCollection: sl(),
+      updateCollection: sl(),
+    ),
+  );
+
   /// Usecases
+
+  //Collections
+  sl.registerLazySingleton(
+        () => GetCollections(
+      collectionsRepository: sl(),
+    ),
+  );
+  sl.registerLazySingleton(
+        () => AddCollection(
+      collectionsRepository: sl(),
+    ),
+  );
+  sl.registerLazySingleton(
+        () => DeleteCollection(
+      collectionsRepository: sl(),
+    ),
+  );
+  sl.registerLazySingleton(
+        () => UpdateCollection(
+      collectionsRepository: sl(),
+    ),
+  );
 
   //Movies
   sl.registerLazySingleton(
@@ -42,11 +79,6 @@ Future<void> init() async {
   );
 
   //User
-  sl.registerLazySingleton(
-    () => InitialUser(
-      userRepository: sl(),
-    ),
-  );
   sl.registerLazySingleton(
     () => GetUser(
       userRepository: sl(),
@@ -59,6 +91,12 @@ Future<void> init() async {
   );
 
   /// Repository
+
+  sl.registerLazySingleton<CollectionsRepository>(
+        () => CollectionsRepositoryImpl(
+      collectionsDatasource: sl(),
+    ),
+  );
 
   sl.registerLazySingleton<MovieRepository>(
     () => MovieRepositoryImpl(
@@ -79,6 +117,11 @@ Future<void> init() async {
   );
 
   /// Datasource
+  sl.registerLazySingleton<CollectionsDatasource>(
+        () => CollectionsDatasourceImpl(
+      database: sl(),
+    ),
+  );
 
   sl.registerLazySingleton<UserDatasource>(
     () => UserDatasourceImpl(
@@ -102,15 +145,23 @@ Future<void> init() async {
       )""");
       await db.rawQuery(
         """
-    INSERT INTO 
-      user(name, image_path)
-    VALUES(?,?)
-    """,
+      INSERT INTO 
+        user(name, image_path)
+      VALUES(?,?)
+        """,
         [
           "User",
-          "assets/images/avatar.png",
+          "",
         ],
       );
+      await db.execute("""
+      CREATE TABLE collections (
+        id INTEGER PRIMARY KEY AUTOINCREMENT, 
+        title TEXT,
+        description TEXT,
+        logo_path TEXT,
+        private INT
+      )""");
     },
   );
 

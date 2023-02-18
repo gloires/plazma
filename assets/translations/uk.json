@@ -26,7 +26,6 @@
     "about": "Дізнатися більше",
     "english": "Англійська",
     "ukrainian": "Українська",
-    "russian": "Російська",
     "camera": "Камера",
     "gallery": "Галерея",
     "action": "Оберіть дію"
@@ -35,7 +34,27 @@
     "title": "Пошук"
   },
   "library_tab": {
-    "title": "Бібліотека"
+    "title": "Бібліотека",
+    "my_library": "Моя бібліотека",
+    "movies": "Фільми",
+    "tv_shows": "Серіали",
+    "anime": "Аніме",
+    "cartoons": "Мультфільми",
+    "my_collections": "Мої Колекції",
+    "new_collection": "Нова колекція"
+  },
+  "add_collection": {
+    "name": "Назва",
+    "name_collection": "Назва колекції",
+    "description": "Опис",
+    "confidentiality": "Конфіденціальність",
+    "private": "Приватна",
+    "private_desc": "Доступ тільки для вас",
+    "link": "Доступ за посиланням",
+    "link_desc": "Доступ для користувачів з посиланням",
+    "cancel": "Відмінити",
+    "create": "Створити",
+    "items": "елементів"
   },
   "calendar_tab": {
     "title": "Календар"

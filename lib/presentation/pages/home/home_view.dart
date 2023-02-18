@@ -23,15 +23,18 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _key,
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Column(
-            children: const [
-              UserPart(),
-              // PopularPart(),
-              // WatchingPart(),
-              // MyLibraryPart(),
-            ],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
+            child: Column(
+              children: const [
+                UserPart(),
+                // PopularPart(),
+                // WatchingPart(),
+                // MyLibraryPart(),
+              ],
+            ),
           ),
         ),
       ),
