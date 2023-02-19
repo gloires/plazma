@@ -542,14 +542,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.0.5"
-  qlevar_router:
-    dependency: "direct main"
-    description:
-      name: qlevar_router
-      sha256: "4da864bc80ab72620c5ce24c927312b841b01aeb8d3b581583049372adbbf54e"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.8.0"
   responsive_sizer:
     dependency: "direct main"
     description:
@@ -558,6 +550,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.1"
+  routemaster:
+    dependency: "direct main"
+    description:
+      name: routemaster
+      sha256: b3b10b6ee31c741b453091e6b33323cc96631b19e4a14fc6069e9de056c7311c
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   shared_preferences:
     dependency: transitive
     description:

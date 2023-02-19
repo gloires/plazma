@@ -5,8 +5,8 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:plazma/core/theme/colors.dart';
 import 'package:plazma/presentation/bloc/user/user_bloc.dart';
 import 'package:plazma/presentation/widgets/user/user_avatar.dart';
-import 'package:qlevar_router/qlevar_router.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:routemaster/routemaster.dart';
 
 class UserPart extends StatefulWidget {
   const UserPart({Key? key}) : super(key: key);
@@ -31,7 +31,7 @@ class _UserPartState extends State<UserPart> {
         _imagePath = state.user.imagePath;
       }
       return GestureDetector(
-        onTap: () => QR.to('/user'),
+        onTap: () => Routemaster.of(context).push("user"), //TODO
         child: Row(
           children: [
             UserAvatar(

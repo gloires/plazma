@@ -1,11 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:qlevar_router/qlevar_router.dart';
 import 'package:plazma/core/theme/themes.dart';
-import 'package:plazma/core/route/route.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:routemaster/routemaster.dart';
 
+import 'core/route/routes.dart';
 import 'locator_service.dart';
 
 class SimpleBlocObserver extends BlocObserver {
@@ -51,7 +51,7 @@ void main() async {
         supportedLocales: const [Locale('en'), Locale('uk')],
         path: 'assets/translations',
         fallbackLocale: const Locale('en'),
-        startLocale: const Locale('en'),
+        useFallbackTranslations: true,
         child: ResponsiveSizer(
           builder: (context, orientation, screenType) {
             return const PlazmaApp();
@@ -68,13 +68,12 @@ class PlazmaApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appRoutes = AppRoutes();
     return MaterialApp.router(
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      routeInformationParser: const QRouteInformationParser(),
-      routerDelegate: QRouterDelegate(appRoutes.routes, initPath: '/dashboard'),
+      routerDelegate: routes,
+      routeInformationParser: const RoutemasterParser(),
       theme: darkTheme,
     );
   }

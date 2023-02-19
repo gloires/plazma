@@ -3,6 +3,8 @@ import 'package:plazma/domain/entities/collection_entity.dart';
 abstract class CollectionsRepository {
   Future<List<CollectionEntity>> getCollections();
 
+  Future<CollectionEntity> getCollection(int collectionID);
+
   Future<void> add(
     String name,
     String description,

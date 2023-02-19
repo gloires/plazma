@@ -9,6 +9,17 @@ abstract class CollectionsEvent extends Equatable {
 
 class CollectionsGetListEvent extends CollectionsEvent {}
 
+class CollectionsGetEvent extends CollectionsEvent {
+  final int id;
+
+  const CollectionsGetEvent({
+    required this.id,
+  });
+
+  @override
+  List<Object> get props => [id];
+}
+
 class CollectionsAddEvent extends CollectionsEvent {
   final String name;
   final String description;

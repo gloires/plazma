@@ -1,5 +1,4 @@
 import 'package:plazma/data/collections/collections_datasource.dart';
-import 'package:plazma/data/collections/collections_model.dart';
 import 'package:plazma/domain/entities/collection_entity.dart';
 import 'package:plazma/domain/repositories/collections_repository.dart';
 
@@ -52,5 +51,10 @@ class CollectionsRepositoryImpl implements CollectionsRepository {
       logoPath,
       privateToInt,
     );
+  }
+
+  @override
+  Future<CollectionEntity> getCollection(int collectionID) async {
+    return await collectionsDatasource.getCollection(collectionID);
   }
 }

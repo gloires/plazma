@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:plazma/core/theme/colors.dart';
 import 'package:plazma/domain/entities/collection_entity.dart';
@@ -9,8 +8,9 @@ import 'package:plazma/presentation/bloc/collections/collections_bloc.dart';
 import 'package:plazma/presentation/widgets/divier_widget.dart';
 import 'package:plazma/presentation/widgets/library/collecations_edit_button.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:routemaster/routemaster.dart';
 
-class EditCollectionDialog extends StatefulWidget {
+class EditCollectionDialog extends StatelessWidget {
   final CollectionsBloc collectionsBloc;
   final CollectionEntity collection;
 
@@ -19,20 +19,6 @@ class EditCollectionDialog extends StatefulWidget {
     required this.collection,
     required this.collectionsBloc,
   }) : super(key: key);
-
-  @override
-  State<EditCollectionDialog> createState() => _EditCollectionDialogState();
-}
-
-class _EditCollectionDialogState extends State<EditCollectionDialog> {
-  @override
-  void initState() {
-    super.initState();
-    final state = widget.collectionsBloc.state;
-    if (state is CollectionsEditedState) {
-      // _setClient(state.client);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +32,7 @@ class _EditCollectionDialogState extends State<EditCollectionDialog> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                widget.collection.logoPath.isEmpty
+                collection.logoPath.isEmpty
                     ? Container(
                         height: 50,
                         width: 50,
@@ -70,7 +56,7 @@ class _EditCollectionDialogState extends State<EditCollectionDialog> {
                             Radius.circular(7),
                           ),
                           image: DecorationImage(
-                            image: FileImage(File(widget.collection.logoPath)),
+                            image: FileImage(File(collection.logoPath)),
                             fit: BoxFit.fill,
                           ),
                         ),
@@ -82,7 +68,7 @@ class _EditCollectionDialogState extends State<EditCollectionDialog> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.collection.title,
+                      collection.title,
                       style: TextStyle(
                         color: Colors.white,
                         fontFamily: 'KyivType',
@@ -96,8 +82,12 @@ class _EditCollectionDialogState extends State<EditCollectionDialog> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Icon(
+                        collection.private ? Icon(
                           PhosphorIcons.lockKeyBold,
+                          color: Colors.white.withOpacity(0.5),
+                          size: 16.sp,
+                        ) : Icon(
+                          PhosphorIcons.linkBold,
                           color: Colors.white.withOpacity(0.5),
                           size: 16.sp,
                         ),
@@ -105,7 +95,7 @@ class _EditCollectionDialogState extends State<EditCollectionDialog> {
                           width: 5,
                         ),
                         Text(
-                          "${widget.collection.count} ${"collection.items".tr()}",
+                          "${collection.count} ${"collection.items".tr()}",
                           style: TextStyle(
                             color: Colors.white.withOpacity(0.5),
                             fontFamily: 'KyivType',
@@ -129,7 +119,7 @@ class _EditCollectionDialogState extends State<EditCollectionDialog> {
             CollectionEditButton(
               icon: PhosphorIcons.pencil,
               title: "collection.edit".tr(),
-              onPressed: () {},
+              onPressed: () => {}
             ),
             const SizedBox(
               height: 25,
@@ -146,13 +136,12 @@ class _EditCollectionDialogState extends State<EditCollectionDialog> {
               icon: PhosphorIcons.trash,
               title: "collection.delete".tr(),
               onPressed: () {
-                widget.collectionsBloc.add(
+                collectionsBloc.add(
                   CollectionsDeleteEvent(
-                    id: widget.collection.id,
+                    id: collection.id,
                   ),
                 );
-                Navigator.pop(context); //TODO: navigator
-                // QR.back();
+                Routemaster.of(context).pop();
               },
             )
           ],

@@ -30,9 +30,7 @@ class _LanguageDropdownState extends State<LanguageDropdown> {
 
     _title = EasyLocalization.of(context)?.currentLocale?.languageCode == "en"
         ? items[0].title
-        : EasyLocalization.of(context)?.currentLocale?.languageCode == "ru"
-            ? items[2].title
-            : items[1].title;
+        : items[1].title;
 
     return SizedBox(
       height: 2.5.h,
@@ -81,23 +79,22 @@ class _LanguageDropdownState extends State<LanguageDropdown> {
               .toList(),
           value: _language,
           onChanged: (value) {
-            setState(
-              () {
-                _language = value as String;
-                setState(
-                  () {
-                    EasyLocalization.of(context)?.setLocale(Locale(value));
-                  },
-                );
-              },
-            );
+            setState(() {
+              _language = value as String;
+              context.setLocale(Locale(_language));
+              final engine = WidgetsFlutterBinding.ensureInitialized();
+              engine.performReassemble();
+            });
           },
-          customButton: (Text(_title,
-              style: TextStyle(
-                  color: Colors.white.withOpacity(0.2),
-                  fontFamily: 'KyivType',
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16.0.sp))),
+          customButton: Text(
+            _title,
+            style: TextStyle(
+              color: Colors.white.withOpacity(0.2),
+              fontFamily: 'KyivType',
+              fontWeight: FontWeight.w400,
+              fontSize: 16.0.sp,
+            ),
+          ),
           buttonElevation: 2,
           dropdownDecoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),

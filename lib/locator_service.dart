@@ -10,6 +10,7 @@ import 'package:plazma/domain/repositories/movie_repository.dart';
 import 'package:plazma/domain/repositories/user_repository.dart';
 import 'package:plazma/domain/usecases/collections/add_collection.dart';
 import 'package:plazma/domain/usecases/collections/delete_collection.dart';
+import 'package:plazma/domain/usecases/collections/get_collection.dart';
 import 'package:plazma/domain/usecases/collections/get_collections.dart';
 import 'package:plazma/domain/usecases/collections/update_collection.dart';
 import 'package:plazma/domain/usecases/movies/get_popular_movie.dart';
@@ -41,6 +42,7 @@ Future<void> init() async {
   sl.registerLazySingleton(
     () => CollectionsBloc(
       getCollections: sl(),
+      getCollection: sl(),
       addCollection: sl(),
       deleteCollection: sl(),
       updateCollection: sl(),
@@ -52,6 +54,11 @@ Future<void> init() async {
   //Collections
   sl.registerLazySingleton(
         () => GetCollections(
+      collectionsRepository: sl(),
+    ),
+  );
+  sl.registerLazySingleton(
+        () => GetCollection(
       collectionsRepository: sl(),
     ),
   );

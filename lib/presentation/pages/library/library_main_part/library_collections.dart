@@ -5,9 +5,9 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:plazma/core/theme/colors.dart';
 import 'package:plazma/domain/entities/collection_entity.dart';
 import 'package:plazma/presentation/bloc/collections/collections_bloc.dart';
-import 'package:plazma/presentation/dialogs/library/add_collection_dialog.dart';
 import 'package:plazma/presentation/pages/library/library_main_part/library_collections_custom_item.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:routemaster/routemaster.dart';
 
 class LibraryCollections extends StatefulWidget {
   const LibraryCollections({Key? key}) : super(key: key);
@@ -38,13 +38,7 @@ class _LibraryCollectionsState extends State<LibraryCollections> {
           ),
         ),
         GestureDetector(
-          onTap: () => showDialog(
-            context: context,
-            // barrierDismissible: false, //TODO: check if close button is good
-            builder: (BuildContext context) => AddCollectionDialog(
-              collectionsBloc: collectionsBloc,
-            ),
-          ),
+          onTap: () => Routemaster.of(context).push("collection/edit"),
           child: Row(
             children: [
               Container(

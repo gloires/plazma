@@ -10,8 +10,8 @@ class Language {
 
   static List<Language> languages() {
     return <Language> [
-      Language(1, "en", "assets/flags/en.svg", "settings.english".tr()),
-      Language(2, "uk", "assets/flags/ua.svg", "settings.ukrainian".tr()),
+      Language(0, "en", "assets/flags/en.svg", "settings.english".tr()), //TODO: not updating names of languages
+      Language(1, "uk", "assets/flags/ua.svg", "settings.ukrainian".tr()),
     ];
   }
 }

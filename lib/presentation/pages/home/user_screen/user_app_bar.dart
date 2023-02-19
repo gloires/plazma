@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:qlevar_router/qlevar_router.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:routemaster/routemaster.dart';
 
 class UserAppBar extends StatelessWidget {
   const UserAppBar({Key? key}) : super(key: key);
@@ -28,9 +28,7 @@ class UserAppBar extends StatelessWidget {
           Align(
             alignment: Alignment.centerRight,
             child: IconButton(
-              onPressed: () {
-                QR.back();
-              },
+              onPressed: () => Routemaster.of(context).pop(),
               icon: Icon(
                 PhosphorIcons.xBold,
                 color: Colors.white,

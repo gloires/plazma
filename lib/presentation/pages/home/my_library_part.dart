@@ -1,7 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:qlevar_router/qlevar_router.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class MyLibraryPart extends StatelessWidget {
@@ -24,7 +22,7 @@ class MyLibraryPart extends StatelessWidget {
                       fontSize: 17.0.sp)),
               GestureDetector(
                 onTap: () {
-                  QR.to('/dashboard/library');
+                  // QR.to('/dashboard/library'); //TODO:
                 },
                 child: Text(
                   "home_tab.see_more".tr(),

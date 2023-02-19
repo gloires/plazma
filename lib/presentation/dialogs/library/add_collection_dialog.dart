@@ -1,20 +1,19 @@
 import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:plazma/core/theme/colors.dart';
+import 'package:plazma/domain/entities/collection_entity.dart';
 import 'package:plazma/presentation/bloc/collections/collections_bloc.dart';
 import 'package:plazma/presentation/widgets/library/collections_private_access.dart';
-import 'package:qlevar_router/qlevar_router.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:routemaster/routemaster.dart';
 
 class AddCollectionDialog extends StatefulWidget {
-  final CollectionsBloc collectionsBloc;
-
   const AddCollectionDialog({
     Key? key,
-    required this.collectionsBloc,
   }) : super(key: key);
 
   @override
@@ -30,7 +29,7 @@ class _AddCollectionDialogState extends State<AddCollectionDialog> {
 
   String _imagePath = "";
 
-  int selected = 0;
+  int _selected = 0;
 
   @override
   void initState() {
@@ -40,7 +39,18 @@ class _AddCollectionDialogState extends State<AddCollectionDialog> {
     _descriptionNode.addListener(() {
       setState(() {});
     });
+    final state = BlocProvider.of<CollectionsBloc>(context).state;
+    if (state is CollectionsLoadedState) {
+      _setCollection(state.collection);
+    }
     super.initState();
+  }
+
+  void _setCollection(CollectionEntity collection) {
+    _nameController.text = collection.title;
+    _descriptionController.text = collection.description;
+    _imagePath = collection.logoPath;
+    _selected = collection.private ? 0 : 1;
   }
 
   @override
@@ -96,16 +106,6 @@ class _AddCollectionDialogState extends State<AddCollectionDialog> {
                         setState(
                           () {
                             _imagePath = result!.path;
-                            // widget.collectionsBloc.add(
-                            //   CollectionsAddEvent(
-                            //     name: _nameController.text,
-                            //     description: _descriptionController.text,
-                            //     private: selected == 0
-                            //         ? true
-                            //         : false, //TODO: change bool to int
-                            //   ),
-                            // );
-                            //colle.add(UserEditEvent(imagePath: result!.path));
                           },
                         );
                       },
@@ -130,9 +130,11 @@ class _AddCollectionDialogState extends State<AddCollectionDialog> {
                                 color: ThemeColors.collectionButton,
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
-                                    image: FileImage(
-                                  File(_imagePath),
-                                )),
+                                  fit: BoxFit.fill,
+                                  image: FileImage(
+                                    File(_imagePath),
+                                  ),
+                                ),
                               ),
                             ),
                     ),
@@ -233,11 +235,11 @@ class _AddCollectionDialogState extends State<AddCollectionDialog> {
                         icon: PhosphorIcons.lockKey,
                         title: "collection.private".tr(),
                         subtitle: "collection.private_desc".tr(),
-                        selected: selected,
+                        selected: _selected,
                         index: 0,
                         onPressed: () {
                           setState(() {
-                            selected = 0;
+                            _selected = 0;
                           });
                         },
                       ),
@@ -248,11 +250,11 @@ class _AddCollectionDialogState extends State<AddCollectionDialog> {
                         icon: PhosphorIcons.link,
                         title: "collection.link".tr(),
                         subtitle: "collection.link_desc".tr(),
-                        selected: selected,
+                        selected: _selected,
                         index: 1,
                         onPressed: () {
                           setState(() {
-                            selected = 1;
+                            _selected = 1;
                           });
                         },
                       ),
@@ -269,17 +271,17 @@ class _AddCollectionDialogState extends State<AddCollectionDialog> {
                       GestureDetector(
                         onTap: () {
                           if (_nameController.text.isNotEmpty) {
-                            widget.collectionsBloc.add(
+                            BlocProvider.of<CollectionsBloc>(context).add(
                               CollectionsAddEvent(
                                 name: _nameController.text,
                                 description: _descriptionController.text,
-                                private: selected == 0
+                                private: _selected == 0
                                     ? true
                                     : false, //TODO: change bool to int
                                 logoPath: _imagePath,
                               ),
                             );
-                            QR.back();
+                            Routemaster.of(context).pop();
                           }
                         },
                         child: Text(

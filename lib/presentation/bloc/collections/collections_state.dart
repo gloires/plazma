@@ -20,4 +20,14 @@ class CollectionsListLoadedState extends CollectionsState {
   List<Object> get props => [collections];
 }
 
-class CollectionsEditedState extends CollectionsState {}
+class CollectionsLoadedState extends CollectionsState {
+  final CollectionEntity collection;
+
+  const CollectionsLoadedState({
+    required this.collection,
+  });
+
+  @override
+  List<Object> get props => [collection];
+}
+

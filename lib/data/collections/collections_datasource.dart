@@ -4,6 +4,8 @@ import 'package:sqflite/sqflite.dart';
 abstract class CollectionsDatasource {
   Future<List<CollectionsModel>> getCollections();
 
+  Future<CollectionsModel> getCollection(int collectionID);
+
   Future<void> add(
     String name,
     String description,
@@ -55,7 +57,34 @@ class CollectionsDatasourceImpl implements CollectionsDatasource {
     return result;
   }
 
-  //TODO: get collection
+
+  @override
+  Future<CollectionsModel> getCollection(int collectionID) async {
+    List<CollectionsModel> result = [];
+
+    List<Map> list = await database.rawQuery("""
+      SELECT
+        collections.id, collections.title, collections.description, collections.logo_path, collections.private
+      FROM
+        collections
+      WHERE
+        collections.id = ?
+      """, [collectionID]);
+
+    for (final item in list) {
+      final collection = CollectionsModel(
+        id: item["id"] ?? 0,
+        title: item["title"] ?? "",
+        description: item["description"] ?? "",
+        logoPath: item["logo_path"] ?? "",
+        count: 0,
+        //TODO: count items in collections
+        private: item["private"] ?? 0,
+      );
+      result.add(collection);
+    }
+    return result.first;
+  }
 
   @override
   Future<void> add(

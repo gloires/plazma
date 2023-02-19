@@ -35,7 +35,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   ionicons: ^0.1.2
   phosphor_flutter: ^1.4.0
-  qlevar_router: ^1.5.11
+  routemaster: ^1.0.1
   easy_localization: ^3.0.1
   responsive_sizer: ^3.1.0
   dropdown_button2: ^1.6.3
