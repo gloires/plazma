@@ -28,8 +28,8 @@ class _AddCollectionDialogState extends State<AddCollectionDialog> {
   final TextEditingController _descriptionController = TextEditingController();
 
   String _imagePath = "";
-
   int _selected = 0;
+  int _collectionID = 0;
 
   @override
   void initState() {
@@ -40,17 +40,18 @@ class _AddCollectionDialogState extends State<AddCollectionDialog> {
       setState(() {});
     });
     final state = BlocProvider.of<CollectionsBloc>(context).state;
-    if (state is CollectionsLoadedState) {
+    if (state is CollectionsStartEditState) {
       _setCollection(state.collection);
     }
     super.initState();
   }
 
   void _setCollection(CollectionEntity collection) {
+    _collectionID = collection.id;
     _nameController.text = collection.title;
     _descriptionController.text = collection.description;
     _imagePath = collection.logoPath;
-    _selected = collection.private ? 0 : 1;
+    _selected = collection.private;
   }
 
   @override
@@ -69,31 +70,14 @@ class _AddCollectionDialogState extends State<AddCollectionDialog> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Row(
-                    children: [
-                      Text(
-                        "library_tab.new_collection".tr(),
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'KyivType',
-                          fontWeight: FontWeight.w500,
-                          fontSize: 18.0.sp,
-                        ),
-                      ),
-                      /*const Expanded(
-                        child: SizedBox.shrink(),
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          QR.back();
-                        },
-                        icon: Icon(
-                          PhosphorIcons.xBold,
-                          color: Colors.white,
-                          size: 20.sp,
-                        ),
-                      ),*/ //TODO: check if close button is good
-                    ],
+                  Text(
+                    "library_tab.new_collection".tr(),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'KyivType',
+                      fontWeight: FontWeight.w500,
+                      fontSize: 18.0.sp,
+                    ),
                   ),
                   SizedBox(
                     height: 30,
@@ -130,7 +114,7 @@ class _AddCollectionDialogState extends State<AddCollectionDialog> {
                                 color: ThemeColors.collectionButton,
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
-                                  fit: BoxFit.fill,
+                                  fit: BoxFit.cover,
                                   image: FileImage(
                                     File(_imagePath),
                                   ),
@@ -275,9 +259,7 @@ class _AddCollectionDialogState extends State<AddCollectionDialog> {
                               CollectionsAddEvent(
                                 name: _nameController.text,
                                 description: _descriptionController.text,
-                                private: _selected == 0
-                                    ? true
-                                    : false, //TODO: change bool to int
+                                private: _selected,
                                 logoPath: _imagePath,
                               ),
                             );
@@ -297,7 +279,7 @@ class _AddCollectionDialogState extends State<AddCollectionDialog> {
                         ),
                       ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),

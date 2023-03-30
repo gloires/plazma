@@ -5,9 +5,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:plazma/core/theme/colors.dart';
 import 'package:plazma/domain/entities/collection_entity.dart';
 import 'package:plazma/presentation/bloc/collections/collections_bloc.dart';
-import 'package:plazma/presentation/dialogs/library/edit_collection_dialog.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:routemaster/routemaster.dart';
 
 class LibraryCollectionsCustomItem extends StatelessWidget {
@@ -28,7 +26,7 @@ class LibraryCollectionsCustomItem extends StatelessWidget {
       padding: const EdgeInsets.only(top: 15.0),
       child: GestureDetector(
         onTap: () =>
-            Routemaster.of(context).push('collection/${collection.id}'),
+            Routemaster.of(context).push('/collection/${collection.id}'),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -57,7 +55,7 @@ class LibraryCollectionsCustomItem extends StatelessWidget {
                       ),
                       image: DecorationImage(
                         image: FileImage(File(collection.logoPath)),
-                        fit: BoxFit.fill,
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
@@ -92,19 +90,12 @@ class LibraryCollectionsCustomItem extends StatelessWidget {
             ),
             const Expanded(child: SizedBox.shrink()),
             IconButton(
-              onPressed: () => showCupertinoModalBottomSheet(
-                //TODO: change to routemaster
-                context: context,
-                builder: (context) => EditCollectionDialog(
-                  collection: collection,
-                  collectionsBloc: collectionsBloc,
-                ),
-              ),
+              onPressed: () => Routemaster.of(context)
+                  .push("/collection_info/${collection.id}"),
               icon: Icon(
-                //TODO: click dots and change icon to more proper one
-                PhosphorIcons.dotsThreeVerticalBold,
+                PhosphorIcons.dotsThreeOutlineVerticalFill,
                 color: Colors.white,
-                size: 20.sp,
+                size: 18.sp,
               ),
             ),
           ],

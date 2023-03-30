@@ -11,7 +11,7 @@ class UpdateCollection {
     required String name,
     required String description,
     required String logoPath,
-    required bool private,
+    required int private,
   }) async {
     await collectionsRepository.update(
       id,

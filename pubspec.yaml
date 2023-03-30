@@ -50,6 +50,7 @@ dependencies:
   sqflite: ^2.2.3
   image_picker: ^0.8.6+1
   path_provider: ^2.0.12
+  flutter_launcher_icons: ^0.12.0
 
 dependency_overrides:
   modal_bottom_sheet:
@@ -60,6 +61,13 @@ dependency_overrides:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  image_path: "assets/logo/logo.png"
+  android: true
+  ios: true
+  adaptive_icon_background: "assets/logo/logo_background.png"
+  adaptive_icon_foreground: "assets/logo/logo.png"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

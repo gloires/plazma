@@ -32,10 +32,13 @@ class _LanguageDropdownState extends State<LanguageDropdown> {
         ? items[0].title
         : items[1].title;
 
-    return SizedBox(
-      height: 2.5.h,
-      width: 22.w,
-      child: DropdownButtonHideUnderline(
+    return DropdownButtonHideUnderline(
+      child: Container(
+        width: MediaQuery.of(context).size.width / 3.5,
+        height: 40,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(3)),
+        ),
         child: DropdownButton2(
           isExpanded: true,
           items: items
@@ -86,13 +89,16 @@ class _LanguageDropdownState extends State<LanguageDropdown> {
               engine.performReassemble();
             });
           },
-          customButton: Text(
-            _title,
-            style: TextStyle(
-              color: Colors.white.withOpacity(0.2),
-              fontFamily: 'KyivType',
-              fontWeight: FontWeight.w400,
-              fontSize: 16.0.sp,
+          customButton: Align(
+            alignment: Alignment.centerRight,
+            child: Text(
+              _title,
+              style: TextStyle(
+                color: Colors.white.withOpacity(0.2),
+                fontFamily: 'KyivType',
+                fontWeight: FontWeight.w400,
+                fontSize: 16.0.sp,
+              ),
             ),
           ),
           buttonElevation: 2,

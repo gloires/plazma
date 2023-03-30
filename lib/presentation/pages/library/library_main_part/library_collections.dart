@@ -38,7 +38,7 @@ class _LibraryCollectionsState extends State<LibraryCollections> {
           ),
         ),
         GestureDetector(
-          onTap: () => Routemaster.of(context).push("collection/edit"),
+          onTap: () => Routemaster.of(context).push("/new_collection"),
           child: Row(
             children: [
               Container(

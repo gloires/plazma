@@ -11,19 +11,24 @@ class CollectionsGetListEvent extends CollectionsEvent {}
 
 class CollectionsGetEvent extends CollectionsEvent {
   final int id;
+  final bool edit;
 
   const CollectionsGetEvent({
     required this.id,
+    required this.edit,
   });
 
   @override
-  List<Object> get props => [id];
+  List<Object> get props => [
+        id,
+        edit,
+      ];
 }
 
 class CollectionsAddEvent extends CollectionsEvent {
   final String name;
   final String description;
-  final bool private;
+  final int private;
   final String logoPath;
 
   const CollectionsAddEvent({
@@ -46,7 +51,7 @@ class CollectionsEditEvent extends CollectionsEvent {
   final String name;
   final String description;
   final String logoPath;
-  final bool private;
+  final int private;
 
   const CollectionsEditEvent({
     required this.id,

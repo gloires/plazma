@@ -18,14 +18,13 @@ class CollectionsRepositoryImpl implements CollectionsRepository {
   Future<void> add(
     String name,
     String description,
-    bool private,
+    int private,
     String logoPath,
   ) async {
-    int privateToInt = private ? 0 : 1;
     await collectionsDatasource.add(
       name,
       description,
-      privateToInt,
+      private,
       logoPath,
     );
   }
@@ -41,15 +40,14 @@ class CollectionsRepositoryImpl implements CollectionsRepository {
     String name,
     String description,
     String logoPath,
-    bool private,
+    int private,
   ) async {
-    int privateToInt = private ? 0 : 1;
     await collectionsDatasource.update(
       id,
       name,
       description,
       logoPath,
-      privateToInt,
+      private,
     );
   }
 

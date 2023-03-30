@@ -8,7 +8,7 @@ class AddCollection {
   Future<void> call({
     required String name,
     required String description,
-    required bool private,
+    required int private,
     required String logoPath,
   }) async {
     await collectionsRepository.add(

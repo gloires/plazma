@@ -14,7 +14,7 @@ class CollectionsModel extends CollectionEntity {
           description: description,
           logoPath: logoPath,
           count: count,
-          private: private == 0 ? true : false,
+          private: private,
         );
 
   factory CollectionsModel.fromEntity(CollectionEntity collection) {
@@ -24,7 +24,7 @@ class CollectionsModel extends CollectionEntity {
       description: collection.description,
       logoPath: collection.logoPath,
       count: collection.count,
-      private: collection.private ? 0 : 1,
+      private: collection.private,
     );
   }
 

@@ -31,7 +31,7 @@ class _UserPartState extends State<UserPart> {
         _imagePath = state.user.imagePath;
       }
       return GestureDetector(
-        onTap: () => Routemaster.of(context).push("user"), //TODO
+        onTap: () => Routemaster.of(context).push("/user"), //TODO
         child: Row(
           children: [
             UserAvatar(

@@ -36,24 +36,28 @@ class _BottomNavigationState extends State<BottomNavigation> {
         tabs: [
           Tab(
             text: "home_tab.title".tr(),
+            iconMargin: const EdgeInsets.only(bottom: 3.0),
             icon: tabPage.index != 0
                 ? const Icon(PhosphorIcons.house)
                 : const Icon(PhosphorIcons.houseFill),
           ),
           Tab(
             text: "search_tab.title".tr(),
+            iconMargin: const EdgeInsets.only(bottom: 3.0),
             icon: tabPage.index != 1
                 ? const Icon(Ionicons.search_outline)
                 : const Icon(Ionicons.search),
           ),
           Tab(
             text: "library_tab.title".tr(),
+            iconMargin: const EdgeInsets.only(bottom: 3.0),
             icon: tabPage.index != 2
                 ? const Icon(PhosphorIcons.books)
                 : const Icon(PhosphorIcons.booksFill),
           ),
           Tab(
             text: "calendar_tab.title".tr(),
+            iconMargin: const EdgeInsets.only(bottom: 3.0),
             icon: tabPage.index != 3
                 ? const Icon(PhosphorIcons.calendarBlank)
                 : const Icon(PhosphorIcons.calendarBlankFill),

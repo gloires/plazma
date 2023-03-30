@@ -127,7 +127,7 @@ class CollectionsDatasourceImpl implements CollectionsDatasource {
         UPDATE
           collections
         SET
-          name = ?,
+          title = ?,
           description = ?,
           logo_path = ?,
           private = ?

@@ -31,3 +31,13 @@ class CollectionsLoadedState extends CollectionsState {
   List<Object> get props => [collection];
 }
 
+class CollectionsStartEditState extends CollectionsState {
+  final CollectionEntity collection;
+
+  const CollectionsStartEditState({
+    required this.collection,
+  });
+
+  @override
+  List<Object> get props => [collection];
+}

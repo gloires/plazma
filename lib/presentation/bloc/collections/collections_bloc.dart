@@ -43,11 +43,17 @@ class CollectionsBloc extends Bloc<CollectionsEvent, CollectionsState> {
   }
 
   FutureOr<void> _onCollectionsGetEvent(
-      CollectionsGetEvent event,
-      Emitter<CollectionsState> emit,
-      ) async {
+    CollectionsGetEvent event,
+    Emitter<CollectionsState> emit,
+  ) async {
     final collection = await getCollection(event.id);
-    emit(CollectionsLoadedState(collection: collection));
+    event.edit
+        ? emit(
+            CollectionsStartEditState(
+              collection: collection,
+            ),
+          )
+        : emit(CollectionsLoadedState(collection: collection));
   }
 
   FutureOr<void> _onCollectionsAddEvent(

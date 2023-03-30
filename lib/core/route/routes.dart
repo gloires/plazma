@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plazma/core/route/material_dialog_route.dart';
 import 'package:plazma/core/route/transitions/transitions.dart';
@@ -8,6 +6,7 @@ import 'package:plazma/presentation/bloc/collections/collections_bloc.dart';
 import 'package:plazma/presentation/bloc/user/user_bloc.dart';
 import 'package:plazma/presentation/dialogs/library/add_collection_dialog.dart';
 import 'package:plazma/presentation/dialogs/library/edit_collection_dialog.dart';
+import 'package:plazma/presentation/dialogs/library/information_collection_dialog.dart';
 import 'package:plazma/presentation/pages/bottom_navigation.dart';
 import 'package:plazma/presentation/pages/calendar/calendar_view.dart';
 import 'package:plazma/presentation/pages/home/home_view.dart';
@@ -18,6 +17,7 @@ import 'package:plazma/presentation/pages/search/search_view.dart';
 import 'package:routemaster/routemaster.dart';
 
 import '../../locator_service.dart';
+import 'modal_bottom.dart';
 
 final routes = RoutemasterDelegate(
   routesBuilder: (BuildContext context) {
@@ -43,7 +43,7 @@ final routes = RoutemasterDelegate(
                 child: const HomeView(),
               ),
             ),
-        '/home/user': (route) => TransitionPage(
+        '/user': (route) => TransitionPage(
               pushTransition: const BottomToTopTransition(),
               popTransition: const BottomToTopTransition(),
               child: MultiBlocProvider(
@@ -74,7 +74,7 @@ final routes = RoutemasterDelegate(
                 child: const LibraryView(),
               ),
             ),
-        '/library/collection/edit': (route) => MaterialDialog(
+        '/new_collection': (route) => MaterialDialog(
               child: MultiBlocProvider(
                 providers: [
                   BlocProvider.value(value: collectionBloc),
@@ -82,7 +82,7 @@ final routes = RoutemasterDelegate(
                 child: const AddCollectionDialog(),
               ),
             ),
-        '/library/collection/:id': (route) => MaterialDialog(
+        '/collection_info/:id': (route) => MaterialModalBottomSheet(
               child: MultiBlocProvider(
                 providers: [
                   BlocProvider.value(
@@ -90,6 +90,39 @@ final routes = RoutemasterDelegate(
                       ..add(
                         CollectionsGetEvent(
                           id: int.parse(route.pathParameters['id'] ?? ""),
+                          edit: false,
+                        ),
+                      ),
+                  ),
+                ],
+                child: const InformationCollectionDialog(),
+              ),
+            ),
+        '/:id/edit': (route) => MaterialDialog(
+              child: MultiBlocProvider(
+                providers: [
+                  BlocProvider.value(
+                    value: collectionBloc
+                      ..add(
+                        CollectionsGetEvent(
+                          id: int.parse(route.pathParameters['id'] ?? ""),
+                          edit: true,
+                        ),
+                      ),
+                  ),
+                ],
+                child: const EditCollectionDialog(),
+              ),
+            ),
+        '/collection/:id': (route) => MaterialDialog(
+              child: MultiBlocProvider(
+                providers: [
+                  BlocProvider.value(
+                    value: collectionBloc
+                      ..add(
+                        CollectionsGetEvent(
+                          id: int.parse(route.pathParameters['id'] ?? ""),
+                          edit: false,
                         ),
                       ),
                   ),

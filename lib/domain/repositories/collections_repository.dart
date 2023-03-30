@@ -8,7 +8,7 @@ abstract class CollectionsRepository {
   Future<void> add(
     String name,
     String description,
-    bool private,
+    int private,
     String logoPath,
   );
 
@@ -19,6 +19,6 @@ abstract class CollectionsRepository {
     String name,
     String description,
     String logoPath,
-    bool private,
+    int private,
   );
 }

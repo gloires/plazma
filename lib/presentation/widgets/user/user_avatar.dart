@@ -21,7 +21,7 @@ class UserAvatar extends StatelessWidget {
           image: image.isEmpty
               ? const AssetImage("assets/images/avatar.png")
               : FileImage(File(image)) as ImageProvider,
-          fit: BoxFit.fill,
+          fit: BoxFit.cover,
         ),
         shape: BoxShape.circle,
       ),

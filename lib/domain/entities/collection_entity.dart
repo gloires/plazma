@@ -6,7 +6,7 @@ class CollectionEntity extends Equatable {
   final String description;
   final String logoPath;
   final int count;
-  final bool private;
+  final int private;
 
   const CollectionEntity({
     required this.id,
